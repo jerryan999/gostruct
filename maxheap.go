@@ -67,6 +67,19 @@ func (h *Heap[T]) swap(i, j int) {
 	h.data[i], h.data[j] = h.data[j], h.data[i]
 }
 
+// Peek returns the top value of the heap without rearrange the heap
+func (h *Heap[T]) Peek() (T, bool) {
+	if h.Size() == 0 {
+		var val T
+		return val, false
+	}
+	return h.data[0], true
+}
+
+func (h *Heap[T]) Size() int {
+	return len(h.data)
+}
+
 // leftChildIndex returns the index of left child of i
 func leftChildIndex(i int) int {
 	return 2*i + 1
@@ -80,17 +93,4 @@ func rightChildIndex(i int) int {
 // parentIndex returns the index of parent of i
 func parentIndex(i int) int {
 	return (i - 1) / 2
-}
-
-// Peek returns the top value of the heap without rearrange the heap
-func (h *Heap[T]) Peek() (T, bool) {
-	if h.Size() == 0 {
-		var val T
-		return val, false
-	}
-	return h.data[0], true
-}
-
-func (h *Heap[T]) Size() int {
-	return len(h.data)
 }
